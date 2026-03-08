@@ -204,7 +204,7 @@ h1 img {
   text-transform: uppercase;
 }
 .gMenu .menu li a:hover {
-  background-color: rgba(238,243,247);
+  background-color: rgba(215,219,223);
 }
 /* チェックボックスは常に非表示です */
 .gMenu .menu-btn {
