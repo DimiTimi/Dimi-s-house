@@ -39,6 +39,15 @@ async function postRecrawl(url: string): Promise<void> {
     body: JSON.stringify({ url }),
   });
 }
+    // スナップショットなしの投稿のみリクロール対象
+const tasks = posts
+  .filter((post) => !extractOgpSnapshotFromMetadata(post.metadata))
+  .map((post) => {
+    const shareVersion = resolvePostShareVersion({ ... });
+    return requestCardbaseRecrawlForPost(post.slug || post.id, shareVersion);
+  });
+
+await Promise.allSettled(tasks);
 $(document).ready(function() {
   // ページ内リンクスクロール
   $('a[href^="#"]').on('click', function(event) {
@@ -252,6 +261,7 @@ $(document).ready(function() {
   </body>
 
 </html>
+
 
 
 
