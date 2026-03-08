@@ -10,51 +10,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    // Share Version = 投稿更新日時と OGP設定更新日時の大きい方
-export function computeShareVersion({
-  postUpdatedAt,
-  authorOgpUpdatedAt,
-  createdAt,
-}: ShareVersionSources): string | null {
-  const maxTimestamp = Math.max(
-    parseTimestamp(postUpdatedAt),
-    parseTimestamp(authorOgpUpdatedAt),
-    parseTimestamp(createdAt)
-  );
-  return maxTimestamp > 0 ? String(maxTimestamp) : null;
-}
-
-// OGP画像URL: /og/{postId}?sv={shareVersion}&lang=ja
-    // src/lib/ogp/cardbase.ts
-
-async function postRecrawl(url: string): Promise<void> {
-  const { apiKey, baseUrl } = getCardbaseConfig();
-
-  await fetch(`${baseUrl}/v1/recrawl`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({ url }),
-  });
-}
-    // スナップショットなしの投稿のみリクロール対象
-const tasks = posts
-  .filter((post) => !extractOgpSnapshotFromMetadata(post.metadata))
-  .map((post) => {
-    const shareVersion = resolvePostShareVersion({ ... });
-    return requestCardbaseRecrawlForPost(post.slug || post.id, shareVersion);
-  });
-
-await Promise.allSettled(tasks);
-    // src/app/post/[slug]/page.tsx
-export const revalidate = 60;
-    時間で設定しています。
-
-headers: {
-  "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-}
 $(document).ready(function() {
   // ページ内リンクスクロール
   $('a[href^="#"]').on('click', function(event) {
@@ -266,4 +221,5 @@ $(document).ready(function() {
       </script>
     </main>
   </body>
+
 </html>
