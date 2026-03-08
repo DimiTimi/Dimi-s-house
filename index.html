@@ -10,6 +10,21 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    // Share Version = 投稿更新日時と OGP設定更新日時の大きい方
+export function computeShareVersion({
+  postUpdatedAt,
+  authorOgpUpdatedAt,
+  createdAt,
+}: ShareVersionSources): string | null {
+  const maxTimestamp = Math.max(
+    parseTimestamp(postUpdatedAt),
+    parseTimestamp(authorOgpUpdatedAt),
+    parseTimestamp(createdAt)
+  );
+  return maxTimestamp > 0 ? String(maxTimestamp) : null;
+}
+
+// OGP画像URL: /og/{postId}?sv={shareVersion}&lang=ja
 $(document).ready(function() {
   // ページ内リンクスクロール
   $('a[href^="#"]').on('click', function(event) {
