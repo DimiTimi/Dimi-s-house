@@ -1,0 +1,618 @@
+@charset "utf-8";
+
+body {
+  font-family: 'Catamaran','Noto Sans JP',sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2c2c2c;
+  font-weight: 400;
+}
+.ffJosefin {
+  font-family: 'Josefin Sans',sans-serif;
+}
+.gMenu ul li a {
+  font-family: 'Catamaran',sans-serif;
+  letter-spacing: .12em;
+}
+header {
+  position: relative;
+  background-image: url("../images/header_background_2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%);
+  width: 1850px;
+  height: auto;
+  animation: logoFade 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes logoFade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.timi {
+  position: absolute;
+  bottom: -80px;
+  right: 5%;
+  width: 750px;
+  z-index: 10;
+  transform: rotate(3deg);
+  filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.3));
+  animation: timiAppear 1.7s;
+  overflow: hidden;
+}
+.timi-inner{
+  position: relative;
+}
+.timi img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: rotate(0deg);
+}
+/* 1枚目は普通に表示 */
+.timi-normal {
+  width: 100%;
+  display: inline-block;
+}
+
+/* hover画像だけ重ねる */
+.timi-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity .1s;
+  display: inline-block;
+}
+
+.timi:hover .timi-hover {
+  opacity: 1;
+}
+@keyframes timiAppear {
+  0% {
+    transform: translateY(200px) rotate(3deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) rotate(3deg);
+    opacity: 1;
+  }
+}
+@keyframes timiShake {
+  0%   { transform: translate(0,0) rotate(0deg); }
+  20%  { transform: translate(-2px,1px) rotate(-1deg); }
+  40%  { transform: translate(2px,-1px) rotate(1deg); }
+  60%  { transform: translate(-1px,2px) rotate(-1deg); }
+  80%  { transform: translate(1px,-2px) rotate(1deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+.timi:hover .timi-inner {
+  animation: timiShake 0.25s infinite;
+}
+.snsMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-right: 100px;
+  z-index: 100;
+}
+.snsMenu ul {
+  display: flex;
+  padding: 15px 0px 0px 0px;
+  gap: 30px;
+}
+.x,
+.YouTube,
+.niconico,
+.mail {
+  height: 40px;
+  width: auto;
+}
+.snsMenu ul li img {
+  display: inline-block; /* transform効かせる用 */
+  transition: transform 0.2s ease;
+}
+/* ホバー中ずっと震える */
+.snsMenu ul li img:hover {
+  animation: shakeInfinite 0.5s infinite;
+}
+@keyframes shakeInfinite {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25%  { transform: translate(-2px, -2px) rotate(-3deg) scale(1.05); }
+  50%  { transform: translate(2px, 2px) rotate(3deg) scale(1.05); }
+  75%  { transform: translate(-1px, -1px) rotate(-2deg) scale(1.05); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+h1 img {
+  background: url(../images/header.png) no-repeat right center/cover;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* メニューを画面上部に固定表示しています */
+.gMenu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+/* メニューアイコンを画面右上に固定しています */
+.gMenu .menu-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  padding-top: 5px;
+  height: 35px;
+}
+/* メニューアイコン（三本線）の真ん中の線です */
+.gMenu .menu-icon .navicon {
+  background: #1C1F24; /* 色は自由に変更可能です */
+  display: block;
+  height: 2px; /* 太さ */
+  width: 31px; /* 長さ */
+  position: relative;
+  transition: background .4s ease-out; /* 形が変わる時のアニメーション */
+}
+/* メニューアイコン（三本線）の上と下の線を疑似要素で追加 */
+.gMenu .menu-icon .navicon::before,
+.gMenu .menu-icon .navicon::after {
+  background: #1C1F24; /* 色は自由に変更可能です */
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .4s ease-out; /* 形が変わる時のアニメーション */
+  width: 100%;
+}
+.gMenu .menu-icon .navicon::before {top: 10px;} /* 位置を上にずらしています */
+.gMenu .menu-icon .navicon::after {top: -10px;} /* 位置を下にずらしています */
+/* 表示されるメニューです */
+.gMenu .menu {
+  background-color: rgba(255,255,255);
+  color: #1C1F24;
+  overflow: hidden;
+  max-height: 0; /* ★最初は高さを0にして非表示状態に */
+  transition: max-height .6s; /* 表示されるときのアニメーション */
+  text-align: center;
+}
+/* メニュー部分のデザインです */
+.gMenu .menu li:first-of-type {
+  padding-top: 50px;
+}
+.gMenu .menu li a {
+  display: block;
+  padding: 24px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.gMenu .menu li a:hover {
+  background-color: rgba(238,243,247);
+}
+/* チェックボックスは常に非表示です */
+.gMenu .menu-btn {
+  display: none;
+}
+/* ▼▼▼以下はチェックボックスがONの時の状態です▼▼▼ */
+.gMenu .menu-btn:checked ~ .menu {
+  max-height: 400px; /* ★チェックボックスがオンの時高さを338pxにして表示させます */
+  transition: max-height .6s;
+}
+/* メニューボタンの中央の線を非表示に */
+.gMenu .menu-btn:checked ~ .menu-icon .navicon {background: transparent;}
+
+/* メニューボタンの上下の線を45度傾けて✕印を作ります */
+.gMenu .menu-btn:checked ~ .menu-icon .navicon::before {transform: rotate(-45deg);top: 0;}
+.gMenu .menu-btn:checked ~ .menu-icon .navicon::after {transform: rotate(45deg);top: 0;}
+/* サイトに合わせてオリジナルカスタマイズ */
+.gMenu .menu-icon {
+  top: 24px;
+}
+.gMenu .menu-icon .navicon,
+.gMenu .menu-icon .navicon::before,
+.gMenu .menu-icon .navicon::after {
+  background: #1C1F24;
+}
+.gMenu .menu-icon .navicon {
+  height: 3px;
+  width: 45px;
+  margin-top: 4px;
+  margin-right: 16px;
+}
+.gMenu .menu-icon .navicon::before {top: 14px;}
+.gMenu .menu-icon .navicon::after {top: -14px;}
+.gMenu .menu li:first-of-type {
+  padding-top: 70px;
+}
+.profSec {
+  position: relative;
+  background-color: #f7f9fb;
+  padding-bottom: 100px;
+  z-index: 10;
+}
+.profSec .main {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+h2 {
+  font-family: 'Catamaran',sans-serif;
+  font-size: 60px;
+  padding-top: 100px;
+  color: #1C1F24;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+h2 span {
+  background-image: linear-gradient(135deg, #4b6da0 0%,#23264a 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  color: transparent;
+}
+.profSec .item {
+  display: flex;          /* 左右並び */
+  align-items: center;    /* 上下中央揃え */
+  gap: 0px;              /* 画像と文章の隙間 */
+  margin-top: 100px;    /* セット同士の縦の間隔 */
+}
+.profSec .item img {
+  width: 300px;
+  height: auto;
+  border-radius: 5%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+.profSec .description {
+  font-family: "Noto Sans JP", sans-serif;
+  flex: 1;
+  text-align: center;
+  letter-spacing: .17em;
+}
+.profSec .description h3 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 15px;
+}
+.detail {
+  font-size: 14px;
+}
+.worksSec {
+  background-color: #EEF3F7;
+  padding-bottom: 100px;
+  margin-bottom: 480px;
+}
+.worksText {
+  font-family: 'Catamaran',sans-serif;
+  font-size: 60px;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  color: #1C1F24;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+.worksText span {
+  background-image: linear-gradient(135deg, #4b6da0 0%,#23264a 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  color: transparent;
+}
+.worksGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:50px;
+  max-width:1360px;
+  margin:40px auto;
+}
+.workItem iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  border:none;
+  border-radius: 12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+.workItem iframe:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.35);
+}
+.workTitle{
+  font-family: "Noto Sans JP", sans-serif;
+  margin-top:10px;
+  font-weight:700;
+  text-align:center;
+}
+.worksSec .channelLink{
+  text-align:center;
+  margin-top:30px;
+}
+.ytButton{
+  display:inline-block;
+  padding:12px 25px;
+  margin-top: 10px;
+  background-color:#FF0000; /* YouTube赤 */
+  color:#fff;
+  font-weight:700;
+  font-size:16px;
+  border-radius:8px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.ytButton:hover{
+  background-color:#cc0000; /* ホバーで少し濃く */
+  transform:translateY(-3px);
+}
+.worksSec::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/パララックス用_3.png) no-repeat center/cover;
+  z-index: -10;
+}
+.noteSec {
+  background-color: #f7f9fb;
+  padding-bottom: 0px;
+}
+.noteTitle {
+  font-family: 'Catamaran',sans-serif;
+  font-size: 60px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  color: #1C1F24;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .17em;
+}
+.noteTitle span {
+  background-image: linear-gradient(135deg, #4b6da0 0%,#23264a 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  color: transparent;
+}
+.noteSec .noteMain {
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+}
+.noteSec h3 {
+  font-weight: bold;
+  font-size: 30px;
+  padding-bottom: 25px;
+  letter-spacing: .17em;
+}
+.noteSec p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 18px;
+  letter-spacing: .17em;
+}
+.noteSec .channelLink{
+  text-align:center;
+  margin-top:30px;
+}
+.xButton{
+  display:inline-block;
+  padding:12px 25px;
+  margin-bottom: 100px;
+  margin-top: 10px;
+  background-color:#000000; /* YouTube赤 */
+  color:#fff;
+  font-weight:700;
+  font-size:16px;
+  border-radius:8px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.xButton:hover{
+  background-color:#333333; /* ホバーで少し濃く */
+  transform:translateY(-3px);
+}
+.date {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 15px;
+  letter-spacing: .17em;
+}
+.footer {
+  background-color: #576070;
+  text-align: center;
+  padding: 30px 0;
+  line-height: 1.8;
+}
+.footer .contact,
+.copyright {
+  font-size: 15px;
+  color: #EEF3F7;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.contact a:hover {
+  text-decoration: underline;
+  text-decoration-color: #EEF3F7
+}
+.backToTop{
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  width: 12%;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 120;
+}
+.backToTop img{
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+/* 表示状態 */
+.backToTop.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+.backToTop:hover{
+  animation: shake 0.4s infinite;
+}
+@keyframes shake {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  20%  { transform: translate(-2px, 1px) rotate(-2deg); }
+  40%  { transform: translate(2px, -1px) rotate(2deg); }
+  60%  { transform: translate(-1px, 2px) rotate(-1deg); }
+  80%  { transform: translate(1px, -2px) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+.sp {
+  display: none;
+}
+/* メディアクエリ */
+@media screen and (max-width: 640px) {
+  header {
+    display: block;
+    background-image: url(../images/header_background_phone.png);
+    background-position:center top;
+    background-size:100%;
+    height: 90vh;
+  }
+  .profSec .item {
+    display: block;
+  }
+  .logo {
+    display: block;
+    margin: 0 auto;
+    left: -13.5%;
+    width: 200%;
+    height: auto;
+  }
+  .timi {
+    width: 80%;
+    position: absolute;
+    left: 35%;
+    bottom: -3%;
+  }
+  .profSec .item img {
+    width: 70%;
+
+  }
+  .profSec .item {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .profSec .description h3 {
+    font-size: 24px;
+    padding-top: 10px;
+  }
+  .backToTop {
+    width: 30%;
+  }
+  h2 {
+    font-size: 36px;
+    padding-top: 50px;
+  }
+  .worksText {
+    font-size: 36px;
+    padding-top: 50px;
+    padding-bottom: 0px;
+  }
+  .noteTitle {
+    font-size: 36px;
+  }
+  .worksGrid{
+    grid-template-columns:1fr;
+    max-width: 85%;
+  }
+  .backToTop {
+    right: -0.5%;
+    bottom: 3%;
+  }
+  .sp {
+    display: inline;
+  }
+  .noteSec .noteMain{
+    width: 85%;
+    margin:auto;
+  }
+  .noteSec h3 {
+    font-weight: bold;
+    font-size: 24px;
+    padding-bottom: 0px;
+    letter-spacing: .10em;
+  }
+  .noteSec p {
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    letter-spacing: .10em;
+    line-height: 180%;
+  }
+  .date {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 14px;
+    letter-spacing: .10em;
+    line-height: 180%;
+  }
+  .footer .contact,
+  .copyright {
+    font-size: 13px;
+    color: #EEF3F7;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .worksSec {
+    margin-bottom: 75%;
+    padding-bottom: 50px;
+  }
+  .worksSec::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../images/パララックス_phone_3.png) no-repeat center/cover;
+    z-index: -10;
+  }
+  .ytButton {
+    margin-bottom: 0px;
+  }
+  .noteTitle {
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
+  .xButton {
+    margin-bottom: 50px;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  /* 画面上に固定表示する白いバー */
+  .headerBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;       /* 高さは調整 */
+    background-color: #EEF3F7;  /* 白い背景 */
+    z-index: 90;        /* SNSやハンバーガーより下 */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+  }
+}
