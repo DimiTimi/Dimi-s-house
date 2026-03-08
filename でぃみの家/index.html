@@ -48,6 +48,8 @@ const tasks = posts
   });
 
 await Promise.allSettled(tasks);
+    // src/app/post/[slug]/page.tsx
+export const revalidate = 60;
 $(document).ready(function() {
   // ページ内リンクスクロール
   $('a[href^="#"]').on('click', function(event) {
@@ -261,6 +263,7 @@ $(document).ready(function() {
   </body>
 
 </html>
+
 
 
 
