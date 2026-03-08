@@ -25,6 +25,20 @@ export function computeShareVersion({
 }
 
 // OGP画像URL: /og/{postId}?sv={shareVersion}&lang=ja
+    // src/lib/ogp/cardbase.ts
+
+async function postRecrawl(url: string): Promise<void> {
+  const { apiKey, baseUrl } = getCardbaseConfig();
+
+  await fetch(`${baseUrl}/v1/recrawl`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({ url }),
+  });
+}
 $(document).ready(function() {
   // ページ内リンクスクロール
   $('a[href^="#"]').on('click', function(event) {
