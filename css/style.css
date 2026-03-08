@@ -607,6 +607,7 @@ h2 span {
   /* 画面上に固定表示する白いバー */
   .headerBar {
     position: fixed;
+    padding-top: 70px;
     top: 0;
     left: 0;
     width: 100%;
