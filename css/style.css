@@ -186,7 +186,7 @@ h1 img {
 .gMenu .menu-icon .navicon::after {top: -10px;} /* 位置を下にずらしています */
 /* 表示されるメニューです */
 .gMenu .menu {
-  background-color: rgba(238,243,247);
+  background-color: #EEF3F7;
   color: #1C1F24;
   overflow: hidden;
   max-height: 0; /* ★最初は高さを0にして非表示状態に */
