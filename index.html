@@ -50,6 +50,11 @@ const tasks = posts
 await Promise.allSettled(tasks);
     // src/app/post/[slug]/page.tsx
 export const revalidate = 60;
+    時間で設定しています。
+
+headers: {
+  "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+}
 $(document).ready(function() {
   // ページ内リンクスクロール
   $('a[href^="#"]').on('click', function(event) {
