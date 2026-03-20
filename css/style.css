@@ -159,7 +159,7 @@ h1 img {
   position: absolute;
   right: 10px;
   top: 12px;
-  padding-top: 5px;
+  padding-top: 16px;
   height: 35px;
 }
 /* メニューアイコン（三本線）の真ん中の線です */
@@ -223,7 +223,7 @@ h1 img {
 .gMenu .menu-btn:checked ~ .menu-icon .navicon::after {transform: rotate(45deg);top: 0;}
 /* サイトに合わせてオリジナルカスタマイズ */
 .gMenu .menu-icon {
-  top: 22px;
+  top: 12px;
 }
 .gMenu .menu-icon .navicon,
 .gMenu .menu-icon .navicon::before,
