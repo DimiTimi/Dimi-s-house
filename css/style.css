@@ -166,8 +166,8 @@ h1 img {
 .gMenu .menu-icon .navicon {
   background: #1C1F24; /* 色は自由に変更可能です */
   display: block;
-  height: 1px; /* 太さ */
-  width: 31px; /* 長さ */
+  height: 3px; /* 太さ */
+  width: 30px; /* 長さ */
   position: relative;
   transition: background .4s ease-out; /* 形が変わる時のアニメーション */
 }
@@ -239,7 +239,7 @@ h1 img {
   background: #1C1F24;
 }
 .gMenu .menu-icon .navicon {
-  height: 4px;
+  height: 3px;
   width: 45px;
   margin-top: 4px;
   margin-right: 16px;
